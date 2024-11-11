@@ -1,0 +1,1 @@
+##Questa repo contiene degli esercizi in difficoltà crescente, al momento ci sono esercizi per list comprehension, string manipulation, entro dicembre conto di mettere esercizi sul web, file, immagini e più-

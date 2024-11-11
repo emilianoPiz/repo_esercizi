@@ -1,0 +1,110 @@
+Tracce degli Esercizi
+Esercizio 1
+Crea una funzione che, preso in input un numero, stampi a schermo se esso è pari o dispari.
+
+Esercizio 2
+Crea una funzione che, presi in input 3 numeri, restituisca il maggiore dei tre.
+
+Esercizio 3
+Scrivi la funzione prec(g1, m1, a1, g2, m2, a2) che ritorna True se la data g1, m1, a1 (giorno, mese, anno) è precedente o uguale alla data g2, m2, a2.
+
+Esempi:
+
+prec(13, 11, 2012, 2, 3, 2013) ritorna True
+prec(13, 11, 2012, 27, 12, 2011) ritorna False
+prec(1, 10, 2013, 1, 11, 2013) ritorna True
+Esercizio 4
+Scrivi la funzione l2d(lst) che, presa in input una lista lst i cui elementi sono numeri da 0 a 9 espressi in lettere ('zero', 'uno', ..., 'nove'), ritorna una nuova lista i cui elementi sono la traduzione in numeri degli elementi di lst.
+
+Esempio:
+
+l2d(['nove', 'due', 'due', 'tre']) ritorna [9, 2, 2, 3]
+Esercizio 5
+Scrivi la funzione distinct(lst) che ritorna una nuova lista che contiene gli stessi elementi di lst ma senza le eventuali ripetizioni.
+
+Esempi:
+
+distinct([3, 1, 3, 2, 6, 6]) ritorna [3, 1, 2, 6]
+distinct(['a', 'ab', 'a', 'ab']) ritorna ['a', 'ab']
+Esercizio 6
+Scrivi la funzione search(lst, andc, orc, notc) che ritorna una nuova lista di stringhe che contiene le stringhe s della lista lst tali che:
+
+Tutte le stringhe della lista andc sono sottostringhe di s.
+Almeno una delle stringhe della lista orc (se orc non è vuota) è una sottostringa di s.
+Nessuna delle stringhe della lista notc è una sottostringa di s.
+Esempi (sia lst = ['mela', 'pera', 'melo']):
+
+search(lst, ['el', 'a'], ['ra', 'pe', 'm'], ['tt', 'lo']) ritorna ['mela']
+search(lst, [], ['ra', 'pe', 'm'], ['tt', 'lo']) ritorna ['mela', 'pera']
+search(lst, ['el', 'a'], [], ['tt', 'lo']) ritorna ['mela']
+search(lst, [], ['ra', 'pe', 'm'], []) ritorna ['mela', 'pera', 'melo']
+Esercizio 7
+Creazione e accesso ai valori
+
+Crea un dizionario chiamato studente con le seguenti coppie chiave-valore:
+
+"nome": "Luca"
+"età": 21
+"corsi": ["Matematica", "Fisica", "Informatica"]
+Esegui le seguenti operazioni:
+
+Accedi e stampa il nome dello studente.
+Aggiungi una nuova chiave "università" con il valore "Università di Roma".
+Modifica l'età dello studente a 22.
+Esercizio 8
+Metodi keys(), values() e items()
+
+Utilizzando il dizionario studente dall'esercizio precedente:
+
+Stampa tutte le chiavi del dizionario.
+Stampa tutti i valori del dizionario.
+Stampa tutte le coppie chiave-valore.
+Esercizio 9
+Scrivi una funzione fattoriale(n) che prende in input un numero intero n e ritorna il fattoriale di n.
+
+Esempio:
+
+Se n = 5, la funzione ritorna 120.
+Esercizio 10
+Scrivi una funzione is_palindrome(s) che prende in input una stringa s e ritorna True se s è un palindromo (si legge uguale da sinistra a destra e da destra a sinistra), altrimenti ritorna False.
+
+Esempi:
+
+is_palindrome('anna') ritorna True
+is_palindrome('ciao') ritorna False
+Scrivi una funzione merge_sorted_lists(a, b) che prende in input due liste ordinate a e b, e ritorna una nuova lista ordinata contenente tutti gli elementi di a e b.
+
+Esempio:
+
+Se a = [1, 3, 5] e b = [2, 4, 6], la funzione ritorna [1, 2, 3, 4, 5, 6].
+Esercizio 11
+Verifica chiavi e valori
+
+Dato il dizionario dati = {"a": 1, "b": 2, "c": 3}:
+
+Verifica se la chiave "b" esiste nel dizionario e stampa un messaggio appropriato.
+Verifica se il valore 4 è presente tra i valori del dizionario e stampa un messaggio appropriato.
+Esercizio 12
+Uso del metodo setdefault()
+
+Partendo dal dizionario impostazioni = {"volume": 50, "luminosità": 70}:
+
+Usa il metodo setdefault() per aggiungere una chiave "contrasto" con valore 80 solo se non esiste già.
+Usa setdefault() per ottenere il valore della chiave "volume".
+Esercizio 13
+Rimozione condizionale di elementi
+
+Dato il dizionario numeri = {"uno": 1, "due": 2, "tre": 3, "quattro": 4}:
+
+Rimuovi tutte le chiavi con valori pari utilizzando una struttura di controllo (ad esempio, un ciclo o una comprehension).
+Esercizio 14
+Ordinamento di un dizionario
+
+Hai il dizionario punteggi = {"Alice": 90, "Bob": 85, "Charlie": 95}:
+
+Crea una lista delle chiavi ordinate in base ai punteggi in ordine crescente.
+Crea un nuovo dizionario ordinato in base ai punteggi in ordine decrescente.
+Esercizio 15
+Funzione per calcolare l'ipotenusa
+
+Scrivi una funzione che calcola l'ipotenusa di un triangolo rettangolo dati i due cateti.
