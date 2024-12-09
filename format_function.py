@@ -94,11 +94,11 @@ Senza cifre decimali.
 
 """
 def dec_format2(n):
-    return f"{n:2.2%}"
+    return f"{n:.2f}"
 def dec_format4(n):
-    return f"{n:2d}"
+    return f"{n:.2f}"
 def rmdec(n):
-    return f"{n:f}"
+    return f"{n:.0f}"
 
 
 
