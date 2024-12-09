@@ -215,3 +215,13 @@ def crea_tabella(lista):
         tabella += "{:10}{:<7}{:8.2f}\n".format(nome, età, salario)
     print(tabella)
     return tabella
+
+def crea_tabella_elegante(lista):
+    header = "{:<10} {:<5} {:>10}".format("Nome", "Età", "Salario")
+    separatore = "-" * len(header)
+    base_righe = "{:<10} {:<5} {:>10.2f}"    
+    tabella = [header, separatore]
+    for persona in lista:
+        tabella.append(base_righe.format(persona["nome"], persona["età"], persona["salario"]))
+    print( "\n".join(tabella))
+    return tabella
