@@ -231,9 +231,80 @@ def func4(S):
     print(isto)
     return isto
 
+''' func1: 2 punti
+Un dizionario D e' fornito come input. Le chiavi di D sono interi mentre
+i valori sono liste di stringhe con ripetizioni.
+
+D = {4: ["c", "h", "f", "g", "e"], 2: ["a", "z", "b", "w"], 0: ["a", "b", "a"]}
+
+Scrivi la funzione func1(D) che costruisice e ritorna la lista W
+che contiene i valori ottenuti prendendo, per ogni chiave K in D, l'elemento
+corrispondente dalla lista L associata a K; prima di selezionare un elemento,
+la funzione ordine L in ordine alfabetico inverso.
+
+Dato D come definito sopra, la funzione ritorna:
+
+    W = ["c", "b", "b"]
+
+poiche' la prima lista in ordine inverso e' ["h", "g", "f", "e", "c"]
+e l'elemento in posizione 4 e' "c".
+La seconda lista e' ["z", "w", "b", "a"] e l'elemento in posizione 2 e' "b".
+La terza lista e' ["b", "a", "a"] e l'elemento in posizione 0 e'  "b".
+'''
 
 
+def func11(D):
+    lista_da_tornare =[]
+    for key, valore in D.items():
+        valore = sorted(valore, reverse=True)
+        lista_da_tornare.append(valore[key])
+    return lista_da_tornare
+'''
+Implementare la funzione func2(list_all, list_rm) per eliminare
+distruttivamente da list_all tutti i numeri interi non contenuti in list_rm.
+Inoltre La funzione non considera le ripetizioni in lista_all,
+quindi l'elenco risultante non conterrà ripetizioni.
+
+Esempio: se lista_all = [2, 4, 3, 4, 4, 3, 4, 5, 2, 6]
+         e lista_rm = [5, 3, 2, 7]
+         lista_all **deve essere modificata distruttivamente** in [2, 3, 5].
+
+NOTA: la funzione NON ritorna nessun valore, la lista "lista_all" e' modificata
+in manira distruttiva.
+'''
 
 
+def func21(list_all, list_rm):
+    lista_all_rep = list(set(list_all))
+    for numero in lista_all_rep:
+        if numero not in list_rm:
+            lista_all_rep.remove(numero)
+    list_all[:] = lista_all_rep
 
 
+'''func1: 2 punti
+#IMPORTANTE:
+    SE ITERI UN DIZIONARIO E DEVI RIMUOVERE COSE USA .copy() method
+Si definisca la funzione func1(a_dict, word) che prende in ingresso un
+dizionario 'a_dict' e una parola 'word'. Ogni chiave del dizionario è
+una stringa che ha una lista di stringhe come valore. La funzione deve
+rimuovere dal dizionario tutte quelle chiavi associate ad una lista
+che contiene una stringa 'word'.  La funzione restituisce il numero di
+chiavi rimosse dal dizionario 'a_dict'.
+
+Esempio: se a_dict = {'a':['a','b','c'], 'b':['a','b'], 'c':['a','c']}
+  l'invocazione di func1(a_dict, 'b') deve restituire 2 e
+  a_dict deve risultare modificato in {'c': ['a', 'c']}.
+  In quanto: e' rimossa la chiave 'a' perche' la lista ['a','b','c']
+  contiene 'b' come word; e' inoltre rimossa la chiave 'b' perche' la lista
+  ['a','b'] contiene 'b' come word.
+'''
+
+def func12(a_dict, word):
+    #contare stringhe rimosse
+    counter = 0
+    for chiave, valore in a_dict.copy().items():
+        if word in valore :
+            a_dict.pop(chiave)
+            counter += 1
+    return counter
