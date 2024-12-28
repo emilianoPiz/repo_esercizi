@@ -41,7 +41,8 @@ def replace_color(image,old_color,new_color):
             if pixel == old_color:
                 img[x][y] = new_color
     return img
-
+pixel_1 = img[0][0]
+(R,G,B) = pixel_1
 '''
 Scrivi una funzione invert_colors(image) che inverte i colori di ogni pixel dell'immagine, trasformando il colore 
 (𝑟,𝑔,𝑏)(r,g,b) in  (255−𝑟,255−𝑔,25−𝑏)
