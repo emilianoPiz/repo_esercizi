@@ -82,7 +82,8 @@ def file_meets_criteria(file_path, necessary, forbidden):
     return contiene_necessary and not contiene_forbidden
 """
 Esercizio 6: Leggere una directory con sottodirectory
-Scrivi una funzione list_all_files(dirname) che ritorna una lista di tutti i file, inclusi quelli presenti nelle sottodirectory. 
+Scrivi una funzione list_all_files(dirname) che ritorna una lista di tutti i file, 
+inclusi quelli presenti nelle sottodirectory. 
 Usa una funzione ricorsiva per esplorare le directory.
 Obiettivo: Introdurre la ricorsione per l'esplorazione.
 

@@ -45,7 +45,6 @@ import os
 def cerca_file_txt(dir_corrente):
     # questa funzione esplora ricorsivamente tutte le cartelle e sotto cartelle della directory data in input
     risultati = []
-    
     for elemento in os.listdir(dir_corrente):
         path = dir_corrente + "/" + elemento
         if os.path.isfile(path) and path.endswith(".txt"):
@@ -85,8 +84,8 @@ def costruisci_dizionario_parole(lista_path, parole,dir1):
                       
 def es80(dir1, parole):
     #chiamo le due funzioni e torno il risultato
-    lista_path = cerca_file_txt(dir1)
-    dizionario_da_tornare = costruisci_dizionario_parole(lista_path, parole,dir1)
+    lista_path_file_txt = cerca_file_txt(dir1)
+    dizionario_da_tornare = costruisci_dizionario_parole(lista_path_file_txt, parole,dir1)
 
     return dizionario_da_tornare
              

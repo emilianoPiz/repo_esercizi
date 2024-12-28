@@ -23,8 +23,7 @@ def es75(w, h, listaColori, listaAltezze, larghezzaPalazzo, filePngOut):
     Nota:   assumete che larghezzaPalazzo sia un valore pari
     Nota:   assumete che tutte le altezze siano minori o uguali dell'altezza h della immagine
     """
-    def create_BG(w,h,colore):
-        return [[colore for _ in range(w)] for _ in range(h)]
+    
     #1 disegnare n rettangoli
     #la distanza deve essere uguale a larghezzaPalazzo, e devono essere a -h da top
     #palazzo0 = listaAltezze0,listaColori0
@@ -47,32 +46,43 @@ def es75(w, h, listaColori, listaAltezze, larghezzaPalazzo, filePngOut):
     #inizio
     blue = (0,0,255)
     counter = 0 
+    def create_BG(w,h,colore):
+        return [[colore for _ in range(w)] for _ in range(h)]
+
     #trovo le combinazioni di colore-altezza
     #esempio [1,2,3] [(0,2,4),(1,23,4),(0,2,8)] = [(1, (0, 2, 4)), (2, (1, 23, 4)), (3, (0, 2, 8))]
     combinazione_altezza_colore = list(zip(listaAltezze,listaColori))
     
     #creo sfondo
     img_new = create_BG(w,h,blue)
-    
+
+    spazio_tra_essi = round((larghezzaPalazzo * len(combinazione_altezza_colore)) - w / len(combinazione_altezza_colore) + 1)
     #creo N palazzi ripeto N volte
     for altezza,colore in combinazione_altezza_colore:
-        #il primo da fare è un rettangolo alto = altezza, colore, larghezza = larghezza_palazzo e cosi via
-        #il centro deve essere? larghezza_palazzo/2
-        #TODO spazio_tra_essi = larghezza_palazzo * len(combinazione,altezzacolore) - w / len(combinazione,altezzacolore)+1
-        #come trovo il prossimo centro?
-        #come calcolo se uno è da sovrascrivere o no?
+        #spazio_tra_essi = larghezza_palazzo * N = len(combinazione,altezzacolore) - w / len(combinazione,altezzacolore)+1
         
-        #se considero altezza_attuale come intervallo e trovo un pixel non blue 
-        #guardando oltre h significa che questo rettangolo sarà più basso dell'altro
-        spazio_tra_essi = (larghezzaPalazzo * len(combinazione_altezza_colore)) - w / len(combinazione_altezza_colore) + 1
+        #come trovo il prossimo centro?
+        # variabile esterna spazio tra essi aggiornata di volta in volta v
+        
+        #come calcolo se uno è da sovrascrivere o no?
+        # se considero altezza_attuale come intervallo e trovo un pixel non blue 
+        # guardando oltre h significa che questo rettangolo sarà più basso dell'altro
+        
         x_finale = spazio_tra_essi + larghezzaPalazzo
         
         for y in range(h - altezza , h):
             for x in range(spazio_tra_essi , x_finale):   
-                if img[x,y] not blue:
+                if img_new[y][x] is not blue:
                     img_new[y][x] = colore
-                    counter += 1 
+                    counter += 1
+                elif img_new[x][y] is blue:
+                    img_new[y][x] = colore
+
+        spazio_tra_essi += x_finale
     
     #fine
     images.save(img_new, filePngOut)
     return counter 
+"C:/Users/User/Desktop/università/esercitazio/FONDAMENTI DI PROGRAMMAZIONE/esercizi/università(FONDAMENTI DI PROGRAMMAZIONE)/repo_esercizi/intermedio/test.png"
+
+es75(250, 100, [(269,200,129)], [50], 10, "C:/Users/User/Desktop/università/esercitazio/FONDAMENTI DI PROGRAMMAZIONE/esercizi/università(FONDAMENTI DI PROGRAMMAZIONE)/repo_esercizi/intermedio/test.png")
