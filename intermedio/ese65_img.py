@@ -1,4 +1,4 @@
-import immagini
+import images
 
 def es65(k,lista1,fout):
     '''
@@ -23,30 +23,26 @@ def es65(k,lista1,fout):
     con es65(100,lista1,'prova1.png') si otterra' la figura nel file prova1.png
     e verra' restituito il valore 8600.
     '''
-    # inserite qui il vostro codice
-    def black_counts(img):
+    def black_counts(img,counts):
         #per ogni pixel che trova nero, aggiunge un 1 in una matrice della stessa dimensione all'immagine
         for x, row in enumerate(img):
             for y, pixel in enumerate(row):
                 if pixel == (0,0,0):
                     counts[x][y] = 1 
                     
-    def draw_sqr(x,y,l,r,g,b):
+    def draw_sqr(x,y,l,r,g,b,img):
         #riceve un oggetto del tipo ( x 20 , y 50 , l 20 , r 0 , g 255 , b 0 )
         #applica la legge di paragone e disegna il quadrato
         #il quadrato inizia da img[x][y] fino a img[x+l][y+l]
-        for x in range (x,x+l):
-            for y in range(y,y+l):
-                r1,g1,b1 = img[x][y]
-                if(img[x][y] != (0,0,0) and r>r1 ):
-                    img[x][y]= (r,g,b)
-                elif(img[x][y] != (0,0,0) and g>g1 ):
-                    img[x][y]= (r,g,b)
-                elif(img[x][y] != (0,0,0) and b>b1 ):
-                    img[x][y]= (r,g,b)
-                elif(img[x][y] == (0,0,0)):
-                    img[x][y]= (r,g,b)
-                
+        lato = len(img)
+        for i in range (x,x+l):
+            for j in range(y,y+l):
+                if x < lato and y < lato:
+                    r1,g1,b1 = img[i][j]
+                    if img[i][j] == (0,0,0):
+                        img[i][j]= (r,g,b)
+                    if r > r1 or (r == r1 and g > g1) or (r == r1 and g == g1 and b >= b1):
+                        img[i][j]= (r,g,b)
     
     #inizio
     black  = (0,0,0)   
@@ -55,19 +51,16 @@ def es65(k,lista1,fout):
 
     #creo N quadrati
     for sqr in lista1:
-        draw_sqr(*sqr)
+        draw_sqr(*sqr,img)
     
     #dopo aver creato i quadrati vedo quanto nero resta    
-    black_counts(img)
+    black_counts(img,counts)
     
     #fine
-    immagini.save(img, fout)
-    
+    images.save(img, fout)    
     #contare gli uni in counts 
     tot = 0
-    for lista  in counts:
+    for lista in counts:
        tot += sum(lista)
-       
     return tot
-lista1=[(20,50,20,0,255,0),(30,60,20,255,0,0),(60,50,20,255,0,0),(70,60,20,0,255,0)]
-es65(100,lista1,'prova1.png')    
+   
