@@ -42,47 +42,61 @@ def es75(w, h, listaColori, listaAltezze, larghezzaPalazzo, filePngOut):
             
         #2. contatore numero pixel appartenenti a più rettangoli
             #TODO : creare un condizionale che si attivi mentre un pixel viene colorato mentre non è (0,0,255)
-            
-    #inizio
-    blue = (0,0,255)
-    counter = 0 
     def create_BG(w,h,colore):
         return [[colore for _ in range(w)] for _ in range(h)]
-
-    #trovo le combinazioni di colore-altezza
+    def drawRettangolo(img, l, r, t, b, c, counts):
+        # si evita di sbordare dalla immagine
+        w = len(img[0])
+        h = len(img)
+        l = max(l, 0)
+        r = min(r, w)
+        t = max(t, 0)
+        b = min(b, h)
+        for x in range(l, r):
+            for y in range(t, b):
+                img[y][x] = c
+                counts[y][x] += 1
+                
+    #inizio
+    blue = (0,0,255)
+    N = len(listaAltezze)
+    #trovo le combinazioni di colore-altezza, qui l'insieme dei rettangoli
     #esempio [1,2,3] [(0,2,4),(1,23,4),(0,2,8)] = [(1, (0, 2, 4)), (2, (1, 23, 4)), (3, (0, 2, 8))]
-    combinazione_altezza_colore = list(zip(listaAltezze,listaColori))
-    
+    rettangoli = list(zip(listaAltezze,listaColori))
+    #ogni volta che su un pixel verrà scritto un colore verrà aggiornato l'interno alle stesse coordinate di counts
+    counts = [[0 for _ in range(w)]for _ in range(h)] 
     #creo sfondo
-    img_new = create_BG(w,h,blue)
-
-    spazio_tra_essi = round((larghezzaPalazzo * len(combinazione_altezza_colore)) - w / len(combinazione_altezza_colore) + 1)
-    #creo N palazzi ripeto N volte
-    for altezza,colore in combinazione_altezza_colore:
-        #spazio_tra_essi = larghezza_palazzo * N = len(combinazione,altezzacolore) - w / len(combinazione,altezzacolore)+1
-        
-        #come trovo il prossimo centro?
-        # variabile esterna spazio tra essi aggiornata di volta in volta v
-        
-        #come calcolo se uno è da sovrascrivere o no?
-        # se considero altezza_attuale come intervallo e trovo un pixel non blue 
-        # guardando oltre h significa che questo rettangolo sarà più basso dell'altro
-        
-        x_finale = spazio_tra_essi + larghezzaPalazzo
-        
-        for y in range(h - altezza , h):
-            for x in range(spazio_tra_essi , x_finale):   
-                if img_new[y][x] is not blue:
-                    img_new[y][x] = colore
-                    counter += 1
-                elif img_new[x][y] is blue:
-                    img_new[y][x] = colore
-
-        spazio_tra_essi += x_finale
-    
-    #fine
+    img_new = [[blue for _ in range(w)] for _ in range(h)]
+      
+    #step = larghezza immagine divisa para per il numero di palazzi più uno 
+    step = w//(N+1)
+   
+    #il punto in basso a sinistra del primo rettangolo
+    #sarà distante dal bordo dell'immagine pari alla distanza degli spazi che separeranno poi tutti i rettangoli
+    start = step - larghezzaPalazzo//2
+    end = start + larghezzaPalazzo
+   
+    #aggiungo i dati necessari al rettangolo per essere disegnato     
+    for indice, altezza, colore in enumerate(rettangoli):
+        rettangoli.append((start, end, h-altezza, h, colore))
+        print(rettangoli[indice])
+        start += step
+        end += step
+    #ordino i rettangoli in base alla loro altezza 
+    rettangoli.sort(key=lambda r: r[2])
+   
+    #creo N palazzi 
+    for r in rettangoli:
+        drawRettangolo(img_new, *r, counts)
     images.save(img_new, filePngOut)
-    return counter 
+   
+    #conto quanti cambiati ci sono guardando in counts, dove un pixel è stato scritto più di una volta
+    cambiati = 0
+    for line in counts:
+        for n in line:
+            if n > 1:
+                cambiati += 1
+    return cambiati
 "C:/Users/User/Desktop/università/esercitazio/FONDAMENTI DI PROGRAMMAZIONE/esercizi/università(FONDAMENTI DI PROGRAMMAZIONE)/repo_esercizi/intermedio/test.png"
 
 es75(250, 100, [(269,200,129)], [50], 10, "C:/Users/User/Desktop/università/esercitazio/FONDAMENTI DI PROGRAMMAZIONE/esercizi/università(FONDAMENTI DI PROGRAMMAZIONE)/repo_esercizi/intermedio/test.png")
