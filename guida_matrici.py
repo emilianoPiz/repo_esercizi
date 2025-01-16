@@ -392,4 +392,6 @@ def snake_traversal(matrix):
 # - Familiarizza con i doppi for, essenziali per la maggior parte delle operazioni sulle matrici.
 # - Impara a riconoscere i pattern (trasposta, diagonali, rotazioni) per velocizzare la risoluzione dei problemi.
 # - Non sottovalutare casi limite (matrice vuota, righe di diversa lunghezza, ecc.).
+# - new_matrix[i][j]=old_matrix[n−1−j][m−1−i]
+# - Questo scambia elementi in modo da effettuare il “ribaltamento” intorno alla diagonale secondaria.
 # - Buono studio e buona programmazione!

@@ -223,12 +223,28 @@ la concatenazione tra stringhe con il carattere '/'.
 """
 
 import os
+def esplora_e_conta(path,ext,dizio):
+    lista_path= os.listdir(directory)
+    for elem in lista_path:
+        full_path = path+ "/"+elem
+        if os.path.isdir(full_path):
+            esplora_e_conta(full_path)
+        elif os.path.isfile(full_path) and full_path.endswith(ext):
+             with open(full_path, mode="r",encoding="utf-8")  as f :
+                 contenuto = f.read()
+             peso = len(contenuto)
+             relative_dir = os.path.relpath(os.path.dirname(full_path), start=directory)
+
+             if relative_dir in dizio:
+                 dizio[relative_dir] += peso
+             else:
+                 dizio[relative_dir]  = peso
 
 
 def ex1(directory, ext):
-    # Inserire qui il proprio codice
-    pass
-
+    ret_dict = {}
+    esplora_e_conta(path,ext,dizio)
+    return ret_dict
 
 
 # %% --------------------------------- EX.2 --------------------------------- #
