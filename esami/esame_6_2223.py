@@ -306,7 +306,7 @@ def change_explore(node,counter):
     if not node:
         return
     if node.sx and node.dx:
-        if node.sx<node.dx:
+        if node.sx.value<node.dx.value:
             node.sx.value, node.dx.value = node.dx.value, node.sx.value
             counter +=1
             change_explore(node.sx,counter)
