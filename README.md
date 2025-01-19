@@ -9,11 +9,11 @@ La repository è organizzata come segue:
 ```
 repo_esercizi/
 |
-|-- base/                # Esercizi per principianti (variabili, cicli, funzioni, ecc.)
-|-- intermedio/          # Esercizi intermedi (OOP, gestione file, eccezioni, ecc.)
-|-- avanzato/            # Esercizi avanzati (decoratori, threading, algoritmi, ecc.)
-|-- progetti/            # Mini-progetti per applicare le conoscenze apprese
-|-- README.md            # Questo file
+|-- base/                # Esercizi per principianti (esercizi molto semplici per prendere il via)
+|-- intermedio/          # Esercizi intermedi (esercizi di difficoltà simile a quelli dell'esame)
+|-- esami/               # Esercizi esami (simulazioni complete di esami passati)
+|-- guide                # Brevi guide (!! NON BASTANO PER FARE L'ESAME !!)
+|-- README               # Questo file
 ```
 
 ## Requisiti
