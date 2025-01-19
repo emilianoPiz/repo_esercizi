@@ -216,7 +216,7 @@ def func4(input_filename, output_filename, length):
         righe.append(" ".join(gruppo))
     
     with open(output_filename, mode="w", encoding="utf-8") as fout:
-        fout.write("\n".join(righe) + "\n")
+        fout.write("".join(righe) + "\n")
 
     return numero_stringhe
 

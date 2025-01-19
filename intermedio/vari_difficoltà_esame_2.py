@@ -291,58 +291,285 @@ def func3(S1, S2):
 """A SEGUIRE UNA SERIE DI ESERCIZI PER PRENDERE LA MANO CON LA CREAZIONE DI ALBERI BINARI"""
 import tree
 # %% ---------------------------- TREE1 ------------------------------------#
+"""
+Riceve:
+- radice: la radice di un albero binario (nodi di tipo tree.BinaryTree)
+- lista_somme: una lista di interi
+
+Restituisce:
+- un nuovo albero binario, della stessa struttura dell’albero originale,
+  i cui nodi hanno valore pari a:
+     valore_originale + lista_somme[profondità]
+  ove 'profondità' è 0 per la radice, 1 per i suoi figli, ecc.
+
+Se la profondità di un nodo supera la lunghezza di lista_somme,
+si somma 0 (oppure puoi assumere che lista_somme sia sufficiente a
+coprire tutte le profondità presenti).
+
+L'albero originale non deve essere modificato.
+"""
+def make_albero(node,lista_somme,level):
+    pass
+    if not node:
+        return None
+    nuovo_valore = node.value+lista_somme[level]
+    nuovo_nodo   = tree.BinaryTree(nuovo_nodo)
+    nuovo_nodo.left   = make_albero(nuovo_nodo.left,lista_somme,level+1)
+    nuovo_nodo.right  = make_albero(nuovo_nodo.right,lista_somme,level+1)
+    return nuovo_nodo 
 def ex2(radice: tree.BinaryTree, lista_somme: list[int]) -> tree.BinaryTree:
-    """
-    Riceve:
-    - radice: la radice di un albero binario (nodi di tipo tree.BinaryTree)
-    - lista_somme: una lista di interi
-    
-    Restituisce:
-    - un nuovo albero binario, della stessa struttura dell’albero originale,
-      i cui nodi hanno valore pari a:
-         valore_originale + lista_somme[profondità]
-      ove 'profondità' è 0 per la radice, 1 per i suoi figli, ecc.
-    
-    Se la profondità di un nodo supera la lunghezza di lista_somme,
-    si somma 0 (oppure puoi assumere che lista_somme sia sufficiente a
-    coprire tutte le profondità presenti).
-    
-    L'albero originale non deve essere modificato.
-    """
-    # IMPLEMENTAZIONE
+
+    return make_albero(radice,lista_somme,0)
     pass
 # %% ---------------------------- TREE2 ------------------------------------#
-def ex3(radice: tree.BinaryTree) -> tree.BinaryTree:
-    """
-    Riceve:
-    - radice: la radice di un albero binario (nodi di tipo tree.BinaryTree)
-    
-    Restituisce:
-    - un nuovo albero binario, che abbia la stessa struttura di 'radice',
-      ma in cui il valore di ciascun nodo è la somma dei valori
-      presenti nel cammino dalla radice a quel nodo nell’albero originale.
-    
-    L'albero di partenza NON deve essere modificato.
-    """
-    # IMPLEMENTAZIONE
-    pass
-# %% ---------------------------- TREE3 ------------------------------------#
-def ex4(radice: tree.BinaryTree, soglie: list[int]) -> tree.BinaryTree:
-    """
-    Riceve:
-    - radice: la radice di un albero binario (nodi di tipo tree.BinaryTree)
-    - soglie: una lista di interi (sufficientemente lunga per
-              la profondità massima dell'albero)
-    
-    Restituisce:
-    - un nuovo albero binario, con la stessa struttura, in cui
-      ciascun nodo ha valore:
-         originale_val se originale_val >= soglie[profondità]
-         altrimenti 0
-      dove 'profondità' è 0 per la radice, 1 per i suoi figli, ecc.
-      
-    L'albero di partenza NON deve essere modificato.
-    """
-    # IMPLEMENTAZIONE
-    pass
+"""
+Riceve:
+- radice: la radice di un albero binario (nodi di tipo tree.BinaryTree)
 
+Restituisce:
+- un nuovo albero binario, che abbia la stessa struttura di 'radice',
+  ma in cui il valore di ciascun nodo è la somma dei valori
+  presenti nel cammino dalla radice a quel nodo nell’albero originale.
+
+L'albero di partenza NON deve essere modificato.
+"""    
+def make_albero2(node,incremento ):
+    if not node:
+        return None
+    #somma tutti i valori vecchi a quelli di questa chiamata
+    nuovo_valore     = node.value+incremento
+    nuovo_nodo       = tree.BinaryTree(nuovo_valore)
+    #passa il valore ottenuto nel nuovo nodo
+    nuovo_nodo.left  = make_albero(nuovo_nodo.left,  nuovo_valore)
+    nuovo_nodo.right = make_albero(nuovo_nodo.right, nuovo_valore)
+    return nuovo_nodo
+
+def ex3(radice: tree.BinaryTree) -> tree.BinaryTree:
+    incremento = 0 
+    return make_albero2(radice, incremento)
+# %% ---------------------------- TREE3 ------------------------------------#
+"""
+Riceve:
+- radice: la radice di un albero binario (nodi di tipo tree.BinaryTree)
+- soglie: una lista di interi (sufficientemente lunga per
+          la profondità massima dell'albero)
+
+Restituisce:
+- un nuovo albero binario, con la stessa struttura, in cui
+  ciascun nodo ha valore:
+     originale_val se originale_val >= soglie[profondità]
+     altrimenti 0
+  dove 'profondità' è 0 per la radice, 1 per i suoi figli, ecc.
+  
+L'albero di partenza NON deve essere modificato.
+"""
+def make_albero3(node,level,soglie):
+    if not node:
+        return None
+    
+    if not node.value >= soglie[level]:
+        nuovo_valore = 0 
+    else:
+        nuovo_valore = node.value
+        
+    nuovo_nodo = tree.BinaryTree(nuovo_valore)
+    nuovo_nodo.left = tree.BinaryTree(nuovo_nodo.left, level+1, soglie) 
+    nuovo_nodo.right = tree.BinaryTree(nuovo_nodo.right, level+1, soglie)
+    return nuovo_nodo
+
+def ex4(radice: tree.BinaryTree, soglie: list[int]) -> tree.BinaryTree:
+    return make_albero3(radice,0,soglie)
+    
+    
+
+# %% ---------------------OS EXPLORATION NO WALK----------------------------#
+"""
+ ═════════════════════════════════════════════════════════════════════════════════
+║                     ESPLORAZIONE RICORSIVA SENZA WALK                           ║
+╚═════════════════════════════════════════════════════════════════════════════════╝
+"""
+# %% ---------------------------- OS.1 -------------------------------------#
+"""
+────────────────────────────────────────────────────────────────────────────
+ESERCIZIO 1: os1(dirin, words, extension)
+────────────────────────────────────────────────────────────────────────────
+1. Riceve in input:
+   - dirin: un percorso di directory esistente come stringa.
+   - words: una lista di parole da analizzare.
+   - extension: l'estensione (ad es. ".txt") dei file da considerare.
+2. Scansiona ricorsivamente dirin e tutte le sue sottocartelle.
+3. Conta, in tutti i file che finiscono con l'estensione specificata, 
+   quante righe contengono *tutte* le parole presenti in 'words'.
+4. Ritorna la somma di queste righe in *tutti* i file.
+
+   Esempio di utilizzo:
+       se dirin = "esercizi", words = ["hello", "world"], extension = ".txt"
+       e ci sono 3 file .txt con:
+         - file1.txt: 2 righe contengono entrambe "hello" e "world".
+         - file2.txt: 1 riga.
+         - file3.txt: nessuna.
+       la funzione restituirà 3.
+"""
+
+#entra nella dir
+#se ci sono, controllo altre dir (caso ricorsivo)
+#se trovo file con estensione giusta
+#conto righe (funzione a se?) V
+def conta_righe(path,parole):
+    numero=0
+    with open(path,mode="r",encoding="utf-8") as f:
+        righe= f.read().splitlines()
+    for riga in righe:
+        if all(word in riga for word in parole):
+            numero += 1
+    return numero 
+
+def esplora_e_conta (path,parole,ext,counter):
+    lista_path=os.listdir(path)
+    for elem in lista_path:
+        full_path = path+'/'+elem
+        if os.path.isdir(full_path):
+            esplora_e_conta(full_path)
+        elif os.path.isfile(full_path) and full_path.endswith(ext):
+            counter += conta_righe(full_path,parole)
+            return counter 
+    
+
+def os1(dirin,words,extension):
+    return esplora_e_conta(dirin,words,extension,0)
+
+    
+    
+    
+    
+    
+    
+# %% ---------------------------- OS.2 -------------------------------------#
+"""
+────────────────────────────────────────────────────────────────────────────
+ESERCIZIO 2: ex4(dirin, forbidden_words)
+────────────────────────────────────────────────────────────────────────────
+1. Riceve in input:
+   - dirin: percorso di una directory esistente come stringa.
+   - forbidden_words: una lista di parole "vietate".
+2. Scansiona ricorsivamente dirin (e sottocartelle) per trovare *solo*
+   file con estensione .txt.
+3. In ciascun file .txt, individua le righe che contengono *almeno una*
+   delle parole "forbidden_words".
+4. Restituisce un dizionario in cui:
+   - La chiave è il percorso (o il nome) del file.
+   - Il valore è la lista di righe contenenti parole vietate.
+
+   Esempio di utilizzo:
+       se dirin = "documenti", forbidden_words = ["errore", "bug"],
+       un possibile ritorno potrebbe essere:
+           {
+             "documenti/file1.txt": [
+               "Abbiamo riscontrato un bug nel sistema.",
+               "La parola ERRORE non compare qui (case sensitive)."
+             ],
+             "documenti/logs/old_errors.txt": [
+               "errore grave di sistema"
+             ]
+           }
+#trovare i file che contengono le parole proibite
+#cercare le righe in cui esse sono presenti (appenderle da qualche parte?)
+#quando trovo una riga che soddisfa questa caratteristica appendo il path come key e
+#   la riga come suo value
+#ritorno dict
+"""
+def crea_lista_righe(path,forbidden_words,righe):
+    lista_righe = []
+    for riga in righe:
+        if any(word in riga for word in forbidden_words):
+            lista_righe.append(riga)
+    return lista_righe
+def esplora_e_popola(path, forbidden_words,dizio):
+    lista_paths=os.listdir(path)
+    for elem in lista_paths:
+        full_path = path + "/"+elem
+        if os.path.isdir(full_path):
+            esplora_e_popola(full_path, forbidden_words,dizio)
+        elif os.path.isfile(full_path) and  full_path.endswith(".txt"):
+            with open(path,mode="r",encoding="utf-8") as f :
+                righe=f.read().splitlines()
+            lista_value = crea_lista_righe(full_path,forbidden_words,righe)        
+            if lista_value:
+                dizio[full_path] = lista_value
+        
+def os2(dirin, forbidden_words):
+    dizio = {}
+    esplora_e_popola(dirin,forbidden_words,dizio)
+    return dizio
+
+
+
+
+
+
+# %% ---------------------------- OS.3 -------------------------------------#
+"""
+────────────────────────────────────────────────────────────────────────────
+ESERCIZIO 3: os3(dirin, words)
+────────────────────────────────────────────────────────────────────────────
+1. Riceve in input:
+   - dirin: percorso di una directory esistente come stringa.
+   - words: lista di parole da cercare.
+2. Esplora ricorsivamente la cartella dirin e tutte le sue sottocartelle.
+   Prende in considerazione soltanto i file di testo .txt.
+3. Per ogni parola in words, calcola la *lunghezza media* delle righe
+   che la contengono (somma lunghezze / numero di righe).
+
+   
+
+4. Restituisce una lista di tuple (parola, media).
+   Se una parola non compare in nessuna riga di nessun file, la media è 0.
+
+   Esempio di utilizzo:
+       se dirin = "testi" e words = ["python", "cane"],
+       la funzione potrebbe restituire:
+         [
+           ("cane", 29.5),  # media delle righe che contengono "cane"
+           ("python", 0)    # "python" non compare, quindi 0
+         ]
+
+"""
+def analizza_file(file_path, words, conteggi):
+    with open(file_path, mode="r", encoding="utf-8") as f:
+        righe = f.read().splitlines()
+    
+    for parola in words:
+        numero_righe = 0
+        somma_lunghezze = 0
+
+        for riga in righe:
+            if parola in riga:
+                numero_righe += 1
+                somma_lunghezze += len(riga)
+        if parola in conteggi:
+            conteggi[parola]['somma'] += somma_lunghezze
+            conteggi[parola]['righe'] += numero_righe
+        else:
+            conteggi[parola] = {'somma': somma_lunghezze, 'righe': numero_righe}
+            
+            
+def esplora_cartella(dirin, words, conteggi):
+    for elemento in os.listdir(dirin):
+        full_path = os.path.join(dirin, elemento)
+        if os.path.isdir(full_path):
+            esplora_cartella(full_path, words, conteggi)
+        elif os.path.isfile(full_path) and full_path.endswith(".txt"):
+            analizza_file(full_path, words, conteggi)
+
+def os3(dirin, words):
+    conteggi = {}
+    esplora_cartella(dirin, words, conteggi)
+    risultato = []
+    for parola in words:
+        if parola in conteggi and conteggi[parola]['righe'] > 0:
+            media = conteggi[parola]['somma'] / conteggi[parola]['righe']
+        else:
+            media = 0
+        risultato.append((parola, media))
+
+    return risultato
