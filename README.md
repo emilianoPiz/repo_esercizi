@@ -12,6 +12,7 @@ repo_esercizi/
 |-- base/                # Esercizi per principianti (esercizi molto semplici per prendere il via)
 |-- intermedio/          # Esercizi intermedi (esercizi di difficoltà simile a quelli dell'esame)
 |-- esami/               # Esercizi esami (simulazioni complete di esami passati)
+|-- algoritmi/           # Esercizi per l'esame "introduzione agli algoritmi"
 |-- guide                # Brevi guide (!! NON BASTANO PER FARE L'ESAME !!)
 |-- README               # Questo file
 ```
