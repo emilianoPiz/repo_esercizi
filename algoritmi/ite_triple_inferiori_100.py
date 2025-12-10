@@ -14,18 +14,18 @@
 # b) si giustifichi il costo computazionale.
 
 def triple_inferiori_100(A):
-    consecutivi = [0]*100
+    consecutivi = [False]*100
 
     for i in range(0,len(A)):
         if A[i]<100:
-            consecutivi[A[i]] = A[i]
+            consecutivi[A[i]] = True
     
-    centrale = 0 
+    centrale = -1
     for i in range (1,99):
-        if consecutivi[i]>0 and consecutivi[i-1]>0 and consecutivi[i+1]>0 :
-            centrale = consecutivi[i]
+        if consecutivi[i] and consecutivi[i-1] and consecutivi[i+1] :
+            centrale = i
 
-    return centrale if centrale >0 else -1
+    return centrale
 
 A = [46, 101, 5, 9,45, 31, 33, 10, 100, 4, 8, 32, 47,32, 500, 11, 99]
 
