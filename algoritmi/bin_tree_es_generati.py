@@ -34,3 +34,31 @@ def path_sum(r,target,s=0):
     if r.left is None and r.right is None:
         return s == target
     return path_sum(r.left,target,s) or path_sum(r.right,target,s)
+
+ 
+# esercizio 3 Dato il puntatore r alla radice di un albero binario T (con nodi aventi campi val, left, right),
+# un nodo u si dice "dominante" se il suo valore val è strettamente maggiore della somma dei valori di tutti i nodi
+# nel sottoalbero radicato in u (escluso u stesso).
+# Nota: Le foglie sono sempre dominanti (somma sottoalbero = 0).
+# Progettare una funzione ricorsiva che restituisca il numero totale di nodi dominanti in T. 
+# Il tempo di esecuzione deve essere Theta(n).
+# a) Descrizione a parole dell'idea.
+# b) Pseudocodice (senza variabili globali!).
+# c) Giustificazione del costo.
+
+def nodi_dominanti(r):
+    if r == None:
+        return (0,0)
+    
+    (somma_sx, count_sx) = nodi_dominanti(r.left)
+    (somma_dx, count_dx) = nodi_dominanti(r.right)
+    
+    sum_tot_sub = somma_sx + somma_dx
+    current_sum = sum_tot_sub + r.val
+    count       = count_dx +count_sx
+    
+    if r.val < sum_tot_sub:
+        count = count + 1
+        
+    return (current_sum,count)
+    
