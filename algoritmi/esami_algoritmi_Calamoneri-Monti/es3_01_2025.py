@@ -20,11 +20,11 @@ def check_min_path(r):
     if r.left is None and r.right is None:
         return r.key
     #passo ricosivo
-    s_sx= check_min_path(r.left)
-    s_dx =check_min_path(r.right)
+    s_sx = check_min_path(r.left)
+    s_dx = check_min_path(r.right)
     # controllo quale dei due path sottostanti è minore
-    if s_sx<s_dx:
+    if s_sx < s_dx:
         #ritorno il minore più il valore corrente
         return r.key + s_sx
     #ritorno il minore più il valore corrente
-    return r.key + s_sx
+    return r.key + s_dx
