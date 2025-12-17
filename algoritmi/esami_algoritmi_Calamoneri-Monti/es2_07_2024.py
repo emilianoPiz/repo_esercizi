@@ -31,7 +31,7 @@
 
 def longest_duplicate(A):
     first=[None]*50
-    last=[None]*50
+    last =[None]*50
 
     for i in range(0,len(A)):
         if first[A[i]] is None: 
