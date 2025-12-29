@@ -1,5 +1,4 @@
 def twoSum(nums,target):
-        # with pointers, BEWARE this is slow as shit in python
         ret =[]
        
         i,j=0,0

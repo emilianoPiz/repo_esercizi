@@ -32,13 +32,14 @@ def coetanei(E,A):
     
     # itero tutta la matrice delle relazioni di conoscenza, esco dall'algoritmo appena è soddisfatta la
     # condizione di essere conoscenti ( A[i][j]==1 ) e di essere coetanei ( if età[i] == età[j] )
-    # Θ(n^2)
+    # O(n^2)
     for i in range(n):
         for j in range(n):
             if A[i][j]==1:
                 if età[i] == età[j]:
                     return (i,j)
     #se non esco mai, significa che non esistono conoscenti coetanei e ritorno (0,0)
+    #Θ(1)
     return (0,0)
 
 E = [(2,35),(1,31),(3,35),(0,35)]
